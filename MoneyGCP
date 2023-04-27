@@ -26,6 +26,7 @@ The chatbot server can publish responses to a Pub/Sub topic, and the user interf
 Cloud Functions: Cloud Functions can be used to trigger events and execute serverless functions in response to user queries.
 Cloud Functions can be used to provide additional functionality to the chatbot application, such as integrating with external APIs or performing data processing tasks.
 
+#BONUS
 BigQuery: BigQuery can be used to store and analyze chatbot data, such as user queries, responses, and other metadata.
 The chatbot server can write user queries and responses to a BigQuery table, and data analysts can use BigQuery to analyze and visualize the data.
 
