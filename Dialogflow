@@ -22,4 +22,4 @@ function processQuery(query) {
 #
 The processQuery function takes a query parameter, which represents the user's query text. 
 The function creates a session with the Dialogflow API and sends the user query to Dialogflow using the detectIntent method.
-The function returns a Promise that resolves to the chatbot response.
+The function returns a Promise that resolves to the chatbot response..
