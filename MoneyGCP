@@ -7,7 +7,9 @@ Whether you're looking to create a budget, save for a specific goal, or invest y
 So why wait? Start today and take control of your finances!
 
 #
-User interface: The user interface can be built using a variety of technologies, such as Angular, React, or Vue.js. The user interface can interact with the chatbot server through an API, such as REST or WebSocket.
+User interface:The user interface can be built using a variety of technologies, such as HTML, CSS, and JavaScript.
+The user interface can interact with the chatbot server through an API, such as REST or WebSocket.
+
 Dialogflow: Dialogflow can be used to create and train the chatbot to understand user queries and provide appropriate responses. 
 Dialogflow can be integrated with a variety of messaging platforms, such as Facebook Messenger, Slack, and Google Assistant.
 
