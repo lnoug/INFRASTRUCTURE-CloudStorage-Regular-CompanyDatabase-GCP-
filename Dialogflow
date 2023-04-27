@@ -1,0 +1,20 @@
+const dialogflow = require('dialogflow');
+const uuid = require('uuid');
+
+const projectId = 'PROJECT_ID';
+const sessionId = uuid.v4();
+const sessionClient = new dialogflow.SessionsClient();
+
+function processQuery(query) {
+  const sessionPath = sessionClient.sessionPath(projectId, sessionId);
+  const request = {
+    session: sessionPath,
+    queryInput: {
+      text: {
+        text: query,
+        languageCode: 'en-US',
+      },
+    },
+  };
+  return sessionClient.detectIntent(request);
+}
