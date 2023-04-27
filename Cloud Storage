@@ -1,0 +1,17 @@
+const { Storage } = require('@google-cloud/storage');
+
+const projectId = 'PROJECT_ID';
+const storage = new Storage();
+const bucketName = 'BUCKET_NAME';
+
+async function logQuery(query, response) {
+  const logFile = `logs/${Date.now()}.json`;
+  const logData = { query, response };
+  const file = storage.bucket(bucketName).file(logFile);
+  await file.save(JSON.stringify(logData));
+  console.log(`Logged query "${query}", response: "${response}"`);
+}
+
+#
+The logQuery function takes a query parameter and a response parameter, which represent the user's query text and the chatbot response text, respectively.
+The function saves the query and response to a JSON file in a Cloud Storage bucket called BUCKET_NAME.
