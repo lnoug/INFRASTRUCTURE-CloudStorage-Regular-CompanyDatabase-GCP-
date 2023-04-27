@@ -1,3 +1,34 @@
-Your personal finance chatbot assistant! MoneyGCP is a chatbot that can help you manage your finances, track your expenses, and make smarter financial decisions. With MoneyGCP, you can chat with a friendly and knowledgeable virtual assistant that can answer all your financial questions and provide personalized financial advice.
-MoneyGCP is built on Google Cloud Platform (GCP), using advanced technologies like Dialogflow, Compute Engine, Kubernetes Engine, Pub/Sub, and Cloud Functions. This means that MoneyGCP is reliable, scalable, and secure, and can handle thousands of users simultaneously.
-Whether you're looking to create a budget, save for a specific goal, or invest your money wisely, MoneyGCP can help you achieve your financial goals. So why wait? Start today and take control of your finances!
+# INTRO
+Your personal finance chatbot assistant! MoneyGCP is a chatbot that can help you manage your finances, track your expenses, and make smarter financial decisions. 
+With MoneyGCP, you can chat with a friendly and knowledgeable virtual assistant that can answer all your financial questions and provide personalized financial advice.
+MoneyGCP is built on Google Cloud Platform (GCP), using advanced technologies like Dialogflow, Compute Engine, Kubernetes Engine, Pub/Sub, and Cloud Functions. 
+This means that MoneyGCP is reliable, scalable, and secure, and can handle thousands of users simultaneously.
+Whether you're looking to create a budget, save for a specific goal, or invest your money wisely, MoneyGCP can help you achieve your financial goals. 
+So why wait? Start today and take control of your finances!
+
+#
+User interface: The user interface can be built using a variety of technologies, such as Angular, React, or Vue.js. The user interface can interact with the chatbot server through an API, such as REST or WebSocket.
+Dialogflow: Dialogflow can be used to create and train the chatbot to understand user queries and provide appropriate responses. 
+Dialogflow can be integrated with a variety of messaging platforms, such as Facebook Messenger, Slack, and Google Assistant.
+
+Compute Engine: Compute Engine can be used to host the chatbot server and provide virtual machines for running the chatbot server. 
+Compute Engine provides scalable and flexible virtual machines that can be customized to meet the application requirements.
+The chatbot server can be built using a variety of technologies, such as Node.js, Python, or Java.
+
+Kubernetes Engine: Kubernetes Engine can be used to manage and orchestrate the containers that run the chatbot application. 
+Kubernetes Engine provides a scalable and reliable platform for deploying and managing containerized applications.
+The chatbot server can be containerized using Docker and deployed on Kubernetes Engine.
+
+Pub/Sub: Pub/Sub can be used to facilitate communication between different components of the chatbot application. 
+The user interface can publish user queries to a Pub/Sub topic, and the chatbot server can subscribe to the topic to receive user queries. 
+The chatbot server can publish responses to a Pub/Sub topic, and the user interface can subscribe to the topic to receive responses.
+
+Cloud Functions: Cloud Functions can be used to trigger events and execute serverless functions in response to user queries.
+Cloud Functions can be used to provide additional functionality to the chatbot application, such as integrating with external APIs or performing data processing tasks.
+
+BigQuery: BigQuery can be used to store and analyze chatbot data, such as user queries, responses, and other metadata.
+The chatbot server can write user queries and responses to a BigQuery table, and data analysts can use BigQuery to analyze and visualize the data.
+
+Stackdriver: Stackdriver can be used to monitor and diagnose issues with the chatbot application.
+Stackdriver provides logging, monitoring, and debugging tools that can be used to troubleshoot issues and optimize the performance of the chatbot application. 
+The chatbot server can write logs to Stackdriver, and the user interface can use Stackdriver to monitor the performance of the chatbot application.
