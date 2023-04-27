@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MoneyGCP - Your Personal Finance Chatbot</title>
+  </head>
+  <body>
+    <div id="chat-window"></div>
+    <form id="query-form">
+      <input type="text" id="query-input" placeholder="Type your message here...">
+      <button type="submit">Send</button>
+    </form>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger
+      chat-icon="https://raw.githubusercontent.com/dialogflow/brand/master/dialogflow_logo_64px.png"
+      intent="WELCOME"
+      chat-title="MoneyGCP"
+      agent-id="AGENT_ID"
+      language-code="en"
+    ></df-messenger>
+  </body>
+</html>
