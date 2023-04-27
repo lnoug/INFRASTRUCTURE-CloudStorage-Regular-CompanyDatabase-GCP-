@@ -19,3 +19,7 @@
     ></df-messenger>
   </body>
 </html>
+
+#
+The chat-window div can be used to display the chatbot responses, and the query-form can be used to collect user queries. 
+The df-messenger tag is a Dialogflow Messenger integration that adds a chat widget to the page and connects to the MoneyGCP agent on Dialogflow.
