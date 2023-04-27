@@ -1,0 +1,20 @@
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+app.post('/query', async (req, res) => {
+  const query = req.body.query;
+  const response = await processQuery(query);
+  const fulfillmentText = response[0].queryResult.fulfillmentText;
+  res.send({ fulfillmentText });
+});
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`MoneyGCP server listening on port ${PORT}`);
+});
+
+#
+The server listens for HTTP POST requests to the /query endpoint and processes the user query using the processQuery function. 
+The server sends back the chatbot response to the user.
