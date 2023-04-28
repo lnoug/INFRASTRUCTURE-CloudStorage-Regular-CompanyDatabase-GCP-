@@ -1,20 +1,36 @@
 # INTRO
-Managing your money can be tough, but what if you had a robot friend that could help you keep track of your expenses? With a personal finance chatbot, you can do just that! This infrastructure creates a chatbot that can understand what you're saying, store your expenses, and tell you how much money you've spent.
+This chatbot will allow users to add new expenses to their budget and view their current budget. 
+We will use several GCP services such as Dialogflow, Pub/Sub, Cloud Functions, and Firestore to create this application.
 
-#SUMMARIZE
+#SUMMARIZE (WEWILL)
+
 To create a personal finance chatbot, we follow these steps:
-1. Create a GCP Project and enable the necessary APIs.
-2. Set up a Dialogflow Agent with intents and entities for adding expenses and viewing budgets.
-3. Configure a Pub/Sub topic and subscription to trigger a Cloud Function when a new message is received.
-4. Write code for the Cloud Function that parses the message and stores it in Firestore.
-5. Configure Firestore with a collection for expenses.
-6. Implement a webhook in the Cloud Function that queries Firestore for the user's expenses and returns the response to Dialogflow.
+1. We will create a GCP project and enable the required APIs for our application.
+2. We will set up a Dialogflow agent to understand user requests related to adding new expenses and viewing their current budget.
+3. We will configure Pub/Sub to allow messages to be sent between different parts of our application and trigger a Cloud Function when a new message is received.
+4. We will create a Cloud Function that is triggered by Pub/Sub and parses the message to store the expense in Firestore.
+5. We will configure Firestore to store and query the user's expenses.
+6. We will implement a webhook in the Cloud Function to respond to the user's request with the total amount of expenses they have spent so far.
+
 
 SIMPLIFLY:
 
-A personal finance chatbot is like a robot friend that can help you manage your money. We can create it by doing a few things:
-1. Create a special place on the internet where the chatbot can live. We call this place a "project".
-2. Teach the chatbot how to understand what you're saying. We do this by creating special "intentions" and "entities" in the chatbot's brain (which we call "Dialogflow").
-3. Create a way for the chatbot to know when you want to add a new expense or see your budget. We do this by setting up a special "channel" that the chatbot listens to.
-4. Create a special program (which we call a "Cloud Function") that listens to the channel and saves your expense to a special place on the internet where we can keep track of all your expenses (which we call "Firestore").
-5. Teach the program how to look up all your expenses and tell you how much money you've spent. We do this by creating a special "webhook" in the program that talks to Firestore and gets all your expenses.
+Imagine you have a piggy bank where you keep your money. 
+You want to know how much money you have spent on different things like candy, toys, or books. 
+To help you keep track of your money, we will create a chatbot that can understand what you want and tell you how much money you have spent.
+
+First, we need to create a special place where our chatbot can live. 
+We call this place a project, and we will use Google Cloud Platform (GCP) to create it. 
+Once we have our project, we will tell it to use some special tools to understand what you want. 
+We call these tools Dialogflow, and they help the chatbot understand what you mean when you ask it something.
+
+Next, we need to create a way for different parts of our chatbot to talk to each other. 
+We call this a messaging service, and we will use Pub/Sub to create it.
+When you ask the chatbot something, Pub/Sub will send a message to a special part of our chatbot called a Cloud Function.
+The Cloud Function will then figure out what you want and store it in a special place called Firestore.
+
+Firestore is like a big book where we can write down all the things you have spent your money on.
+When you want to know how much money you have spent, we can look in this book and add up all the things you have spent money on.
+
+Finally, we need to make sure our chatbot can talk back to you. We call this a webhook, and we will create it in the Cloud Function. 
+When you ask the chatbot how much money you have spent, it will look in the big book (Firestore) and add up all the things you have spent your money on. Then it will tell you how much money you have spent so far.
