@@ -24,7 +24,7 @@ _______________________________________________________________________________e
 
 # 5. Configure Firestore
 
-B Firestore is a NoSQL database that allows us to store and query data. To configure Firestore, follow these steps:
+Firestore is a NoSQL database that allows us to store and query data. To configure Firestore, follow these steps:
 1. Go to the Firestore Console and create a new Firestore instance.
 2. Create a collection for expenses.
 
