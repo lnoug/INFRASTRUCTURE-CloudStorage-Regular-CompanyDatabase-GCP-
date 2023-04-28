@@ -1,36 +1,71 @@
-# 1. Create a new project
-Create a new GCP project using the Google Cloud Console or the gcloud command-line tool.
-Here's an example of how to create a new project using gcloud:
+# 1. Create a new project & enable necessary APIs
+Create a new GCP project using the Google Cloud Console or the gcloud command-line tool and Enable the required APIs 
 
 CODE:
-$ gcloud projects create my-finance-chatbot-app
-___________________________________________________________________________________________________end.
-This creates a new GCP project named my-finance-chatbot-app (or pick another name of your choice).
 
-# 2. Enable necessary APIs
-To enable the necessary APIs for your project, such as the Compute Engine API, the Kubernetes Engine API, and the Dialogflow API. 
-Enable APIs by using the Google Cloud Console or the gcloud command-line tool. 
+gcloud projects create <PROJECT_ID>
+gcloud config set project <PROJECT_ID>
+___________________________________________________________________________________________________end.
+gcloud services enable dialogflow.googleapis.com
+gcloud services enable cloudfunctions.googleapis.com
+gcloud services enable pubsub.googleapis.com
+gcloud services enable firestore.googleapis.com
+___________________________________________________________________________________________________end.
+This creates a new GCP project with name of your choice and enable the required APIs for the project such as Dialogflow API, Cloud Functions API, Pub/Sub API, and Firestore API. 
+
+
+
+# 2. Set up a Dialogflow Agent
+
+Go to the Dialogflow Console and create a new agent.
+Define the agent's default language and time zone.
+1. Create an intent that represents the user's request to add a new expense to their budget.
+2. Create an intent that represents the user's request to view their current budget.
+3. Create an entity that represents the type of expense (e.g., groceries, rent, utilities).
 
 CODE:
-$ gcloud services enable compute.googleapis.com container.googleapis.com dialogflow.googleapis.com
-___________________________________________________________________________________________________end.
-This enables the Compute Engine API, the Kubernetes Engine API, and the Dialogflow API for your project
 
-# 3. Create a service account
-Create a service account for your chatbot application, which will be used to interact with other GCP services.
+const dialogflow = require('dialogflow');
+const uuid = require('uuid');
+const sessionClient = new dialogflow.SessionsClient();
+async function detectIntent(projectId, sessionId, query, languageCode) {
+  const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId);
+  
+  const request = {
+    session: sessionPath,
+    queryInput: {
+      text: {
+        text: query,
+        languageCode: languageCode,
+      },
+    },
+  };
+  
+  const responses = await sessionClient.detectIntent(request);
+  return responses[0].queryResult;
+}
+___________________________________________________________________________________________________end.
+
+# 4.  Configure Pub/Sub
+1.Go to the Pub/Sub Console and create a new topic for expense messages.
+2.Create a subscription to the topic that triggers a Cloud Function when a new message is received.
 
 CODE:
-$ gcloud iam service-accounts create chatbot-sa --display-name "Chatbot Service Account"
-___________________________________________________________________________________________________end.
-This creates a new service account named chatbot-sa with the display name Chatbot Service Account.
+const {PubSub} = require('@google-cloud/pubsub');
+const pubsub = new PubSub();
 
-# 4. Grant IAM roles to the service account
-Grant the necessary IAM roles to the service account, such as the Kubernetes Engine Admin role and the Dialogflow API Admin role. 
-You can grant IAM roles using the Google Cloud Console or the gcloud command-line tool. 
-Here's an example of how to grant the necessary IAM roles using gcloud:
+async function publishMessage(topicName, data) {
+  const topic = pubsub.topic(topicName);
+  const dataBuffer = Buffer.from(JSON.stringify(data));
+  const messageId = await topic.publish(dataBuffer);
+  console.log(`Message ${messageId} published to ${topicName}`);
+}
 
-CODES:
-$ gcloud projects add-iam-policy-binding my-finance-chatbot-app --member "serviceAccount:chatbot-sa@my-finance-chatbot-app.iam.gserviceaccount.com" --role "roles/container.admin"
-$ gcloud projects add-iam-policy-binding my-finance-chatbot-app --member "serviceAccount:chatbot-sa@my-finance-chatbot-app.iam.gserviceaccount.com" --role "roles/dialogflow.admin"
+exports.publishMessage = async (req, res) => {
+  const data = req.body;
+  const topicName = 'expenses';
+  await publishMessage(topicName, data);
+  res.status(200).send('Message published.');
+};
 ___________________________________________________________________________________________________end.
 This grants the Kubernetes Engine Admin role and the Dialogflow API Admin role to the chatbot-sa (#3) service account.
