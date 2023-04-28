@@ -22,3 +22,5 @@ CODE:
 
 gcloud functions deploy FUNCTION_NAME --entry-point=upload --runtime=python38 --trigger-http --allow-unauthenticated --set-env-vars BUCKET_NAME=BUCKET_NAME,TOPIC_NAME=TOPIC_NAME
 
+Output:
+The output of this step will be a new Cloud Function deployed on GCP that can process HTTP requests and store data in a Cloud Storage bucket.
