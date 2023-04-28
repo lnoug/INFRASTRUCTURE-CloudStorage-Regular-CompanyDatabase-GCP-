@@ -1,0 +1,20 @@
+# INTRO
+Managing your money can be tough, but what if you had a robot friend that could help you keep track of your expenses? With a personal finance chatbot, you can do just that! This infrastructure creates a chatbot that can understand what you're saying, store your expenses, and tell you how much money you've spent.
+
+#SUMMARIZE
+To create a personal finance chatbot, we follow these steps:
+1. Create a GCP Project and enable the necessary APIs.
+2. Set up a Dialogflow Agent with intents and entities for adding expenses and viewing budgets.
+3. Configure a Pub/Sub topic and subscription to trigger a Cloud Function when a new message is received.
+4. Write code for the Cloud Function that parses the message and stores it in Firestore.
+5. Configure Firestore with a collection for expenses.
+6. Implement a webhook in the Cloud Function that queries Firestore for the user's expenses and returns the response to Dialogflow.
+
+SIMPLIFLY:
+
+A personal finance chatbot is like a robot friend that can help you manage your money. We can create it by doing a few things:
+1. Create a special place on the internet where the chatbot can live. We call this place a "project".
+2. Teach the chatbot how to understand what you're saying. We do this by creating special "intentions" and "entities" in the chatbot's brain (which we call "Dialogflow").
+3. Create a way for the chatbot to know when you want to add a new expense or see your budget. We do this by setting up a special "channel" that the chatbot listens to.
+4. Create a special program (which we call a "Cloud Function") that listens to the channel and saves your expense to a special place on the internet where we can keep track of all your expenses (which we call "Firestore").
+5. Teach the program how to look up all your expenses and tell you how much money you've spent. We do this by creating a special "webhook" in the program that talks to Firestore and gets all your expenses.
