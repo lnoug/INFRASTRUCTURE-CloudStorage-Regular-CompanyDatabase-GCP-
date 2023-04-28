@@ -1,17 +1,19 @@
 # INTRO
 
-Built on Google Cloud Platform (GCP), using  Dialogflow, Compute Engine, Kubernetes Engine, Terraform... 
+STEPS:
+1. Create a GCP project and enable the required APIs.
+2. Set up a Dialogflow agent with intents and entities for adding expenses and viewing budgets.
+3. Configure a Pub/Sub topic and subscription to trigger a Cloud Function when a new message is received.
+4. Write code for the Cloud Function that parses the message and stores it in Firestore.
+5. Configure Firestore with a collection for expenses.
+6. Implement a webhook in the Cloud Function that queries Firestore for the user's expenses and returns the response to Dialogflow.
 
-PRO:
-We created an infrastructure for a personal finance chatbot application on Google Cloud Platform using a number of tools and services.
-First, we created a special place for the chatbot to live in called Google Cloud Platform. We used a tool called Terraform to create this infrastructure, which included creating a new project on Google Cloud Platform, enabling necessary APIs, creating a service account, granting IAM roles, and creating a Kubernetes cluster to host the chatbot application.
-Next, we created a program called Dialogflow to help the chatbot understand what you're saying when you talk about your money. We also created a new Dialogflow agent to handle the chatbot conversations and an Intent to handle user inputs.
-Then, we built and deployed the chatbot application to the Kubernetes cluster using a tool called Cloud Build, which helps us automatically build and deploy our application code.
-Overall, we created an infrastructure that allows us to run a personal finance chatbot application on Google Cloud Platform, using a combination of tools and services including Terraform, Dialogflow, Kubernetes, and Cloud Build.
+SIMPLIFLY:
 
-SIMPLIFY:
-Imagine you want to create a robot that can talk to you about your money. To do that, we need to create a special place for the robot to live in. We call this place a "cloud", and we use a special type of cloud called "Google Cloud Platform". It's like a big computer that we can use to store things and run programs.
-To make the robot talk to you, we also need to create a special program called a "chatbot". The chatbot will help the robot understand what you're saying and answer your questions about your money. We use a tool called "Dialogflow" to create the chatbot.
-Next, we need to make sure the robot and the chatbot can talk to each other. We create a special type of computer called a "Kubernetes cluster" to make sure the robot and the chatbot can talk to each other and work together.
-Finally, we use a special tool called "Terraform" to help us create and manage all these things we just talked about. It's like a magic wand that helps us make sure everything is working together perfectly.
-So in summary, we created a special place for a robot to live in called Google Cloud Platform, we created a program called Dialogflow to help the robot understand what you're saying, we created a special computer called a Kubernetes cluster to make sure everything works together, and we used a magic wand called Terraform to help us manage everything we created.
+To make a chatbot for managing money, we need to do a few things.
+First, we need to create a special place on the internet that the chatbot can live in. We call this place a "project". 
+Then, we need to teach the chatbot how to understand what you're saying. We do this by creating special "intents" and "entities" in the chatbot's brain (which we call "Dialogflow").
+Next, we need to create a way for the chatbot to know when you want to add a new expense or see your budget. We do this by setting up a special "channel" that the chatbot listens to. When you tell the chatbot something, it sends a message to this channel.
+Then, we need to create a special program (which we call a "Cloud Function") that listens to the channel and does something when it gets a message. When the program gets a message from the chatbot, it adds the expense to a special place on the internet where we can keep track of all your expenses (which we call "Firestore").
+Finally, we need to teach the program how to look up all your expenses and tell you how much money you've spent. We do this by creating a special "webhook" in the program that talks to Firestore and gets all your expenses. When you ask the chatbot to show you your budget, it talks to the program and the program gives it back all your expenses.
+And that's how we make a chatbot for managing your money!
