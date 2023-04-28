@@ -1,8 +1,10 @@
 # INTRO
-Your personal finance chatbot assistant! A chatbot that can help you manage your finances, track your expenses, and make smarter financial decisions. 
-You can chat with a friendly and knowledgeable virtual assistant that can answer all your financial questions and provide personalized financial advice.
-Built on Google Cloud Platform (GCP), using advanced technologies like Dialogflow, Compute Engine, Kubernetes Engine, Pub/Sub, and Cloud Functions. 
-This means that it is reliable, scalable, and secure, and can handle thousands of users simultaneously.
-Whether you're looking to create a budget, save for a specific goal, or invest your money wisely, this chatbot can help you achieve your financial goals. 
-So why wait? Start today and take control of your finances!
 
+Built on Google Cloud Platform (GCP), using  Dialogflow, Compute Engine, Kubernetes Engine, Terraform... 
+
+
+Imagine you want to create a robot that can talk to you about your money. To do that, we need to create a special place for the robot to live in. We call this place a "cloud", and we use a special type of cloud called "Google Cloud Platform". It's like a big computer that we can use to store things and run programs.
+To make the robot talk to you, we also need to create a special program called a "chatbot". The chatbot will help the robot understand what you're saying and answer your questions about your money. We use a tool called "Dialogflow" to create the chatbot.
+Next, we need to make sure the robot and the chatbot can talk to each other. We create a special type of computer called a "Kubernetes cluster" to make sure the robot and the chatbot can talk to each other and work together.
+Finally, we use a special tool called "Terraform" to help us create and manage all these things we just talked about. It's like a magic wand that helps us make sure everything is working together perfectly.
+So in summary, we created a special place for a robot to live in called Google Cloud Platform, we created a program called Dialogflow to help the robot understand what you're saying, we created a special computer called a Kubernetes cluster to make sure everything works together, and we used a magic wand called Terraform to help us manage everything we created.
