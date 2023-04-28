@@ -17,17 +17,19 @@ This creates a new GCP project with name of your choice and enable the required 
 
 # 2. Set up a Dialogflow Agent
 
-Go to the Dialogflow Console and create a new agent.
-Define the agent's default language and time zone.
-1. Create an intent that represents the user's request to add a new expense to their budget.
-2. Create an intent that represents the user's request to view their current budget.
-3. Create an entity that represents the type of expense (e.g., groceries, rent, utilities).
+1. Go to the Dialogflow Console and create a new agent.
+2. Define the agent's default language and time zone.
+3. Create an intent that represents the user's request to add a new expense to their budget.
+4. Create an intent that represents the user's request to view their current budget.
+5. Create an entity that represents the type of expense (e.g., groceries, rent, utilities).
 
 CODE:
 
 const dialogflow = require('dialogflow');
 const uuid = require('uuid');
+
 const sessionClient = new dialogflow.SessionsClient();
+
 async function detectIntent(projectId, sessionId, query, languageCode) {
   const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId);
   
@@ -47,10 +49,13 @@ async function detectIntent(projectId, sessionId, query, languageCode) {
 ___________________________________________________________________________________________________end.
 
 # 4.  Configure Pub/Sub
+Pub/Sub is a messaging service that allows us to send messages between different parts of our application
+
 1.Go to the Pub/Sub Console and create a new topic for expense messages.
 2.Create a subscription to the topic that triggers a Cloud Function when a new message is received.
 
 CODE:
+
 const {PubSub} = require('@google-cloud/pubsub');
 const pubsub = new PubSub();
 
@@ -68,4 +73,4 @@ exports.publishMessage = async (req, res) => {
   res.status(200).send('Message published.');
 };
 ___________________________________________________________________________________________________end.
-This grants the Kubernetes Engine Admin role and the Dialogflow API Admin role to the chatbot-sa (#3) service account.
+
