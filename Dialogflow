@@ -1,25 +1,14 @@
-const dialogflow = require('dialogflow');
-const uuid = require('uuid');
+# 5. Create a Kubernetes cluster
 
-const projectId = 'PROJECT_ID';
-const sessionId = uuid.v4();
-const sessionClient = new dialogflow.SessionsClient();
+Create a Kubernetes cluster to host your chatbot application. You can create a Kubernetes cluster using the Google Cloud Console or the gcloud command-line tool.
+Here I created a Kubernetes cluster using gcloud:
 
-function processQuery(query) {
-  const sessionPath = sessionClient.sessionPath(projectId, sessionId);
-  const request = {
-    session: sessionPath,
-    queryInput: {
-      text: {
-        text: query,
-        languageCode: 'en-US',
-      },
-    },
-  };
-  return sessionClient.detectIntent(request);
-}
+CODE:
+$ gcloud container clusters create my-chatbot-cluster --num-nodes=3 --machine-type=n1-standard-2 --zone=us-central1-a --service-account=chatbot-sa@my-finance-chatbot-app.iam.gserviceaccount.com
+_______________________________________________________________________________end.
+This creates a new Kubernetes cluster named my-chatbot-cluster with 3 nodes of type n1-standard-2 in the us-central1-a zone, and associates it with the chatbot-sa (#3) service account
 
-#
-The processQuery function takes a query parameter, which represents the user's query text. 
-The function creates a session with the Dialogflow API and sends the user query to Dialogflow using the detectIntent method.
-The function returns a Promise that resolves to the chatbot response..
+# 6. Build and deploy the chatbot application
+Build and deploy the chatbot application to the Kubernetes cluster. You can use a Dockerfile and Kubernetes manifests to build and deploy the application, and use Google Container Registry to store the Docker image. (Check my Repository -chatbot-Customer-Service-GCP-expert- for more details)
+
+
