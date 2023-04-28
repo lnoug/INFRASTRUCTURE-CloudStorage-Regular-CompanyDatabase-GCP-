@@ -48,11 +48,11 @@ async function detectIntent(projectId, sessionId, query, languageCode) {
 }
 ___________________________________________________________________________________________________end.
 
-# 4.  Configure Pub/Sub
+# 3.  Configure Pub/Sub
 Pub/Sub is a messaging service that allows us to send messages between different parts of our application
 
-1.Go to the Pub/Sub Console and create a new topic for expense messages.
-2.Create a subscription to the topic that triggers a Cloud Function when a new message is received.
+1. Go to the Pub/Sub Console and create a new topic for expense messages.
+2. Create a subscription to the topic that triggers a Cloud Function when a new message is received.
 
 CODE:
 
