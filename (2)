@@ -39,38 +39,40 @@ CODE:
   });
   return expenses;
 }
+exports.getExpenses = async (req, res) => {
+  const expenses = await getExpenses();
+  res.status(200).send(expenses);
+};
 _______________________________________________________________________________end.
 
 
 6. Implement a Webhook
 
-A webhook is a way for Dialogflow to communicate with our Cloud Function and get the user's budget information. 
-
+A webhook helps Dialogflow communicate with our Cloud Function and get the user's budget information. 
+A webhook is a way for the Cloud Function to communicate with the Dialogflow agent and respond to the user's request.
 To implement a webhook, follow these steps:
-1. Write code that queries Firestore for the user's expenses.
-2. Write code that returns the response to Dialogflow.
+1. Write code in the Cloud Function that queries Firestore for the user's expenses.
+2. Format the data as a response that Dialogflow can understand.
+3. Implement the response as a webhook in the Cloud Function.
 
 CODE:
 
-async function handleWebhook(req, res) {
-  const parameters = req.body.queryResult.parameters;
-  const intent = req.body.queryResult.intent.displayName;
-  
-  if (intent === 'add-expense') {
-    const data = {
-      type: parameters.type,
-      amount: parameters.amount,
-    };
-    await publishMessage('expenses', data);
-    const response = `Added ${data.amount} dollars for ${data.type}.`;
-    res.json({fulfillmentText: response});
-  } else if (intent === 'show-budget') {
-    const expenses = await getExpenses();
-    const total = expenses.reduce((acc, expense) => acc + expense.amount, 0);
-    const response = `Your total expenses are ${total} dollars.`;
-    res.json({fulfillmentText: response});
-  }
-}
+exports.processMessage = async (message, context) => {
+  const data = JSON.parse(Buffer.from(message.data, 'utf8').toString());
+  const expense = {
+    amount: data.amount,
+    type: data.type,
+    date: new Date(),
+  };
+  await firestore.collection('expenses').add(expense);
+  console.log(`Expense added: ${JSON.stringify(expense)}`);
 
-
+  const intent = await detectIntent(projectId, sessionId, data.message, languageCode);
+  const expenses = await getExpenses();
+  const response = `You have spent $${calculateTotal(expenses)} on expenses.`;
+  const result = {
+    fulfillmentText: response,
+  };
+  return result;
+};
 
