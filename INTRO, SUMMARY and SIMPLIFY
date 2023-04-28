@@ -1,36 +1,27 @@
 # INTRO
-This chatbot will allow users to add new expenses to their budget and view their current budget. 
-We will use several GCP services such as Dialogflow, Pub/Sub, Cloud Functions, and Firestore to create this application.
+ we will build a simple web application that allows companies to securely upload and store their data in a Google Cloud Storage bucket.
+ We will use Google Cloud Functions to process the data and Google Cloud Pub/Sub to send notifications when new data is uploaded. 
+ 
 
-#SUMMARIZE (WEWILL)
+#SUMMARIZE
 
-To create a personal finance chatbot, we follow these steps:
-1. We will create a GCP project and enable the required APIs for our application.
-2. We will set up a Dialogflow agent to understand user requests related to adding new expenses and viewing their current budget.
-3. We will configure Pub/Sub to allow messages to be sent between different parts of our application and trigger a Cloud Function when a new message is received.
-4. We will create a Cloud Function that is triggered by Pub/Sub and parses the message to store the expense in Firestore.
-5. We will configure Firestore to store and query the user's expenses.
-6. We will implement a webhook in the Cloud Function to respond to the user's request with the total amount of expenses they have spent so far.
+1. Create a project
+2. Set up a development environment
+3. Write code
+4. Test the application locally
+5. Deploy the application to Google Cloud Functions
+6. Set up a Cloud Storage bucket
+7. Update the application to use Cloud Storage and Cloud Pub/Sub
+8. Deploy and monitor the application
+
+#Simplify
 
 
-SIMPLIFLY:
-
-Imagine you have a piggy bank where you keep your money. 
-You want to know how much money you have spent on different things like candy, toys, or books. 
-To help you keep track of your money, we will create a chatbot that can understand what you want and tell you how much money you have spent.
-
-First, we need to create a special place where our chatbot can live. 
-We call this place a project, and we will use Google Cloud Platform (GCP) to create it. 
-Once we have our project, we will tell it to use some special tools to understand what you want. 
-We call these tools Dialogflow, and they help the chatbot understand what you mean when you ask it something.
-
-Next, we need to create a way for different parts of our chatbot to talk to each other. 
-We call this a messaging service, and we will use Pub/Sub to create it.
-When you ask the chatbot something, Pub/Sub will send a message to a special part of our chatbot called a Cloud Function.
-The Cloud Function will then figure out what you want and store it in a special place called Firestore.
-
-Firestore is like a big book where we can write down all the things you have spent your money on.
-When you want to know how much money you have spent, we can look in this book and add up all the things you have spent money on.
-
-Finally, we need to make sure our chatbot can talk back to you. We call this a webhook, and we will create it in the Cloud Function. 
-When you ask the chatbot how much money you have spent, it will look in the big book (Firestore) and add up all the things you have spent your money on. Then it will tell you how much money you have spent so far.
+1. Create a new project on GCP.
+2. Install some special tools on your computer to write code for the web application.
+3. Write code that tells the web application what to do when someone visits or uploads data.
+4. Test the web application on your own computer to make sure it works.
+5. Put the web application on the internet using a tool called Google Cloud Functions.
+6. Create a special place to store all the data people upload using Google Cloud Storage.
+7. Update the web application's code to use Google Cloud Storage to store data and Cloud Pub/Sub to send notifications when someone uploads new data.
+8. Deploy the updated web application and monitor it using Stackdriver to make sure everything is working correctly.
