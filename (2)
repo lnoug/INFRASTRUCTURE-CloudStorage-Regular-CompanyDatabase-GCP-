@@ -1,88 +1,76 @@
-# 5. Create a Kubernetes cluster
+# 4. Create a Cloud Function
 
-Create a Kubernetes cluster to host your chatbot application. You can create a Kubernetes cluster using the Google Cloud Console or the gcloud command-line tool.
-Here I created a Kubernetes cluster using gcloud:
+A Cloud Function is a piece of code that runs in response to an event. In our case, the Cloud Function will run when a new message is received from Pub/Sub. To create a Cloud Function, follow these steps:
+
+1. Go to the Cloud Functions Console and create a new function.
+2. Create a function that is triggered by the Pub/Sub subscription.
+3. Write code that parses the message and stores it in Firestore.
 
 CODE:
-$ gcloud container clusters create my-chatbot-cluster --num-nodes=3 --machine-type=n1-standard-2 --zone=us-central1-a --service-account=chatbot-sa@my-finance-chatbot-app.iam.gserviceaccount.com
+const {Firestore} = require('@google-cloud/firestore');
+const firestore = new Firestore();
+
+exports.processMessage = async (message, context) => {
+  const data = JSON.parse(Buffer.from(message.data, 'utf8').toString());
+  const expense = {
+    amount: data.amount,
+    type: data.type,
+    date: new Date(),
+  };
+  await firestore.collection('expenses').add(expense);
+  console.log(`Expense added: ${JSON.stringify(expense)}`);
+};
 _______________________________________________________________________________end.
-This creates a new Kubernetes cluster named my-chatbot-cluster with 3 nodes of type n1-standard-2 in the us-central1-a zone, and associates it with the chatbot-sa (#3) service account
 
-# 6. Build and deploy the chatbot application
+# 5. Configure Firestore
 
-Build and deploy the chatbot application to the Kubernetes cluster. You can use a Dockerfile and Kubernetes manifests to build and deploy the application, and use Google Container Registry to store the Docker image. (Check my Repository -chatbot-Customer-Service-GCP-expert-(3)- for more details)
-Here's the infrastructure code using Terraform to build and deploy the chatbot application
+B Firestore is a NoSQL database that allows us to store and query data. To configure Firestore, follow these steps:
+1. Go to the Firestore Console and create a new Firestore instance.
+2. Create a collection for expenses.
 
 CODE:
-resource "google_container_registry_repository" "chatbot_repository" {
-  name = "chatbot"
-}
 
-resource "docker_registry_image" "chatbot_image" {
-  name = "${google_container_registry_repository.chatbot_repository.name}:latest"
-  build {
-    context = "."
-    dockerfile = "Dockerfile"
-    tags = ["latest"]
-  }
-}
 
-resource "kubernetes_deployment" "chatbot_deployment" {
-  metadata {
-    name = "chatbot"
-  }
-
-  spec {
-    replicas = 3
-
-    selector {
-      match_labels = {
-        app = "chatbot"
-      }
-    }
-
-    template {
-      metadata {
-        labels = {
-          app = "chatbot"
-        }
-      }
-
-      spec {
-        container {
-          name = "chatbot"
-          image = "${google_container_registry_repository.chatbot_repository.name}:latest"
-          ports {
-            container_port = 8000
-          }
-        }
-      }
-    }
-  }
-}
-
-resource "kubernetes_service" "chatbot_service" {
-  metadata {
-    name = "chatbot-service"
-  }
-
-  spec {
-    selector = {
-      app = "chatbot"
-    }
-
-    port {
-      name = "http"
-      port = 80
-      target_port = 8000
-    }
-
-    type = "LoadBalancer"
-  }
+ async function getExpenses() {
+  const expenses = [];
+  const snapshot = await firestore.collection('expenses').get();
+  snapshot.forEach((doc) => {
+    expenses.push(doc.data());
+  });
+  return expenses;
 }
 _______________________________________________________________________________end.
 
-This infrastructure code uses Terraform to create a Google Container Registry repository for the chatbot application, build a Docker image from the Dockerfile, deploy the chatbot application to the Kubernetes cluster using a Kubernetes deployment and service, and expose the chatbot application to the internet using a load balancer.
+
+6. Implement a Webhook
+
+A webhook is a way for Dialogflow to communicate with our Cloud Function and get the user's budget information. 
+
+To implement a webhook, follow these steps:
+1. Write code that queries Firestore for the user's expenses.
+2. Write code that returns the response to Dialogflow.
+
+CODE:
+
+async function handleWebhook(req, res) {
+  const parameters = req.body.queryResult.parameters;
+  const intent = req.body.queryResult.intent.displayName;
+  
+  if (intent === 'add-expense') {
+    const data = {
+      type: parameters.type,
+      amount: parameters.amount,
+    };
+    await publishMessage('expenses', data);
+    const response = `Added ${data.amount} dollars for ${data.type}.`;
+    res.json({fulfillmentText: response});
+  } else if (intent === 'show-budget') {
+    const expenses = await getExpenses();
+    const total = expenses.reduce((acc, expense) => acc + expense.amount, 0);
+    const response = `Your total expenses are ${total} dollars.`;
+    res.json({fulfillmentText: response});
+  }
+}
 
 
 
